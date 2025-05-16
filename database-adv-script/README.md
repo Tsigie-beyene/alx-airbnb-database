@@ -26,4 +26,25 @@ WHERE id IN (
     GROUP BY property_id
     HAVING AVG(rating) > 4.0
 );
- 
+
+
+# Task 2 - Apply Aggregations and Window Functions
+
+This task applies SQL aggregation and window functions to analyze user and property activity within the Airbnb database.
+
+## Queries Implemented
+
+### 1. Total Bookings by Each User
+
+We use the COUNT aggregation function and GROUP BY clause to find how many bookings each user has made:
+
+```sql
+SELECT
+    u.id AS user_id,
+    u.name AS user_name,
+    COUNT(b.id) AS total_bookings
+FROM users u
+LEFT JOIN bookings b ON u.id = b.user_id
+GROUP BY u.id, u.name
+ORDER BY total_bookings DESC;
+
